@@ -16,8 +16,8 @@ class UserList extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () {}, 
-            )
+            onPressed: () {},
+          )
         ],
       ),
       body: ListView.builder(
