@@ -21,8 +21,7 @@ class UsersProvider with ChangeNotifier {
 
   void put(User user) {
     // ignore: unnecessary_null_comparison
-    assert(user !=
-        null); // Adicione uma assertiva para verificar se o usuário não é nulo
+    if (user != null) {} 
 
     if (user.id.trim().isNotEmpty && _items.containsKey(user.id)) {
       _items.update(
@@ -46,5 +45,13 @@ class UsersProvider with ChangeNotifier {
       );
     }
     notifyListeners();
+  }
+
+  void remove(User user) {
+    // ignore: unnecessary_null_comparison
+    if (user != null) {
+      _items.remove(user.id);
+      notifyListeners();
+    } 
   }
 }
