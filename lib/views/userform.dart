@@ -3,26 +3,37 @@ import 'package:flutter_crud/models/user.dart';
 import 'package:flutter_crud/provider/users.dart';
 import 'package:provider/provider.dart';
 
-class UserForm extends StatelessWidget {
-  UserForm({super.key});
+class UserForm extends StatefulWidget {
+  const UserForm({super.key});
 
+  @override
+  State<UserForm> createState() => _UserFormState();
+}
+
+class _UserFormState extends State<UserForm> {
   final _form = GlobalKey<FormState>();
+
   final Map<String, String> _formData = {};
 
   void loadFormData(User user) {
-      _formData['id'] = user.id;
-      _formData['name'] = user.name;
-      _formData['email'] = user.email;
-      _formData['avatarUrl'] = user.avatarUrl;
+    _formData['id'] = user.id;
+    _formData['name'] = user.name;
+    _formData['email'] = user.email;
+    _formData['avatarUrl'] = user.avatarUrl;
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    final User? user = ModalRoute.of(context)?.settings.arguments as User?;
+    if (user != null) {
+      loadFormData(user);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final User? user = ModalRoute.of(context)?.settings.arguments as User?;
-    if (user != null) {
-    loadFormData(user);
-  }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cadastro Usuário'),
